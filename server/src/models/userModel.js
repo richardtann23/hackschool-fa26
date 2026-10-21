@@ -10,6 +10,32 @@ const userSchema = new mongoose.Schema(
          * 
          * Reminder: make sure each field is comma-separated!
          */
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        username: {
+            type: String,
+            required: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        bio: {
+            type: "",
+            required: true,
+        },
+        streak: {
+            type: number,
+            default: 0
+        },
+        past_games: {
+            type: [PastGameSchema],
+            default: []
+        },
+
         created_at: {
             type: Date,
             default: Date.now
@@ -19,3 +45,7 @@ const userSchema = new mongoose.Schema(
 );
 
 //Turn your userSchema into a model and export in module.exports!
+
+const User = mongoose.model("User", userSchema, "users");
+
+module.exports = User;
